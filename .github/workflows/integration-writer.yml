@@ -1,0 +1,16 @@
+name: integration-writer
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          date -u +%FT%TZ >> actions-writes.txt
+          git add actions-writes.txt
+          git commit -m "integration write (D0 check 3)"
+          git push origin HEAD:master
